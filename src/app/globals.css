@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+/* Brand palette: metallic gold from the Einova logo on a switchable surface colour.
+   ink = body text; brand = section/card surfaces; on-brand = text on those surfaces.
+   Themes are medium (not near-black) tones with white text; default is burgundy.
+   The footer theme picker overrides these via html[data-theme]. */
+@theme {
+  --color-ink: #1c1c21;
+  --color-brand: #7a2e45;
+  --color-brand-800: #873651;
+  --color-brand-700: #943f5c;
+  --color-brand-600: #a14a68;
+  --color-on-brand: #ffffff;
+  --color-gold: #c8992e;
+  --color-gold-light: #f2d27a;
+  --color-gold-dark: #8a6417;
+  --color-gold-50: #fbf6e8;
+  --color-gold-100: #f5e8c4;
+  --color-cream: #fbf8f1;
+}
+
+/* inline: next/font defines --font-cinzel / --font-inter on <body>, not :root */
+@theme inline {
+  --font-serif: var(--font-cinzel), "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Theme overrides; keep the ids in sync with src/data/themes.js */
+html[data-theme="navy"] {
+  --color-brand: #2b4c74;
+  --color-brand-800: #3c5a7f;
+  --color-brand-700: #4d698a;
+  --color-brand-600: #5e7795;
+}
+html[data-theme="emerald"] {
+  --color-brand: #1f6656;
+  --color-brand-800: #317264;
+  --color-brand-700: #437e71;
+  --color-brand-600: #558b7f;
+}
+html[data-theme="teal"] {
+  --color-brand: #1e6573;
+  --color-brand-800: #30717e;
+  --color-brand-700: #427e89;
+  --color-brand-600: #548a95;
+}
+html[data-theme="purple"] {
+  --color-brand: #563a7c;
+  --color-brand-800: #644a86;
+  --color-brand-700: #715a91;
+  --color-brand-600: #7f699b;
+}
+html[data-theme="crimson"] {
+  --color-brand: #8a2f3a;
+  --color-brand-800: #93404a;
+  --color-brand-700: #9d505a;
+  --color-brand-600: #a66169;
+}
+html[data-theme="forest"] {
+  --color-brand: #2f5e3a;
+  --color-brand-800: #406b4a;
+  --color-brand-700: #50785a;
+  --color-brand-600: #618569;
+}
+html[data-theme="coffee"] {
+  --color-brand: #5a3e2e;
+  --color-brand-800: #674d3f;
+  --color-brand-700: #745d4f;
+  --color-brand-600: #826c60;
+}
+html[data-theme="plum"] {
+  --color-brand: #6b3a5e;
+  --color-brand-800: #774a6b;
+  --color-brand-700: #835a78;
+  --color-brand-600: #8f6985;
+}
+html[data-theme="steel"] {
+  --color-brand: #3d5a73;
+  --color-brand-800: #4d677e;
+  --color-brand-700: #5c7489;
+  --color-brand-600: #6c8295;
+}
+html[data-theme="dark"] {
+  --color-brand: #474c58;
+  --color-brand-800: #565a65;
+  --color-brand-700: #646973;
+  --color-brand-600: #737780;
+}
+/* Gradient themes: large surfaces get the gradient, small buttons/cards keep the solid --color-brand */
+html[data-theme="sunset"] {
+  --color-brand: #683460;
+  --color-brand-800: #74446d;
+  --color-brand-700: #805479;
+  --color-brand-600: #8c6586;
+  --brand-gradient: linear-gradient(135deg, #7a2e45 0%, #563a7c 100%);
+}
+html[data-theme="ocean"] {
+  --color-brand: #245874;
+  --color-brand-800: #36657f;
+  --color-brand-700: #47738a;
+  --color-brand-600: #598095;
+  --brand-gradient: linear-gradient(135deg, #2b4c74 0%, #1e6573 100%);
+}
+html[data-theme="aurora"] {
+  --color-brand: #255965;
+  --color-brand-800: #366671;
+  --color-brand-700: #48747e;
+  --color-brand-600: #59818a;
+  --brand-gradient: linear-gradient(135deg, #1f6656 0%, #2b4c74 100%);
+}
+html[data-theme="dusk"] {
+  --color-brand: #404378;
+  --color-brand-800: #4f5283;
+  --color-brand-700: #5f618e;
+  --color-brand-600: #6e7098;
+  --brand-gradient: linear-gradient(135deg, #563a7c 0%, #2b4c74 100%);
+}
+html[data-theme="bronze"] {
+  --color-brand: #824434;
+  --color-brand-800: #8c5344;
+  --color-brand-700: #966254;
+  --color-brand-600: #a07165;
+  --brand-gradient: linear-gradient(135deg, #7a2e45 0%, #8a5a22 100%);
+}
+section.bg-brand,
+footer.bg-brand,
+nav.bg-brand {
+  background-image: var(--brand-gradient, none);
+}
+/* Light: warm sand surfaces, dark text, and deeper gold so it stays readable */
+html[data-theme="light"] {
+  --color-brand: #f4ecdc;
+  --color-brand-800: #fbf6ea;
+  --color-brand-700: #ede2cb;
+  --color-brand-600: #e5d7bb;
+  --color-on-brand: #1c1c21;
+  --color-gold-light: #8a6417;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Metallic gold, like the logo lettering */
+.text-gold-gradient {
+  background: linear-gradient(100deg, #8a6417 0%, #c8992e 28%, #f2d27a 50%, #c8992e 72%, #8a6417 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(110deg, #8a6417 0%, #c8992e 35%, #f2d27a 55%, #c8992e 80%, #8a6417 100%);
+}
+
+.border-gold-gradient {
+  border-image: linear-gradient(90deg, transparent, #c8992e, transparent) 1;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f5efe0;
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d9bf7c;
+  border-radius: 3px;
+}
+
+/* Gold shine sweep used on primary buttons */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%) skewX(-20deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transition: transform 0.7s ease;
+}
+.btn-shine:hover::after {
+  transform: translateX(120%) skewX(-20deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
